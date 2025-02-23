@@ -1,6 +1,7 @@
 from SimOneServiceAPI import *
 from SimOneSensorAPI import *
 #调用所有API
+import ctypes
 import HDMapAPI as HDMapAPI
 #from SimOneIOStruct import  *
 import time 
