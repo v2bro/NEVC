@@ -280,6 +280,7 @@ def SampleGetRoadST(laneId, pos):
 	print("height of input point:", stzInfo.z)
 
 def SampleContainsLane(laneId):
+#查看车道是否在地图中
 	print("SampleContainsLane:")
 	ret = HDMapAPI.containsLane(laneId)
 	print("return state:", ret)
