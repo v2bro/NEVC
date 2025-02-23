@@ -1,0 +1,80 @@
+以下是该脚本的中文解释：
+
+---
+
+### 脚本功能概述
+
+该脚本是一个基于 **SimOneServiceAPI** 和 **HDMapAPI** 的 Python 程序，用于与仿真环境进行交互，主要操作高精度地图（HD Map）数据。它能够获取车道信息、交通标志、交通信号灯、停车位等地图相关数据，并提供了多个示例函数来展示如何使用这些 API。
+
+---
+
+### 主要功能模块
+
+1. **初始化与终止**：
+   - 使用 `SoInitSimOneAPI` 初始化仿真 API，连接到本地服务器（`127.0.0.1`）。
+   - 使用 `SoTerminateSimOneAPI` 终止仿真 API。
+   - 通过 `HDMapAPI.loadHDMap` 加载高精度地图。
+
+2. **GPS 回调函数**：
+   - `gpsCB` 是一个回调函数，用于接收并更新车辆的 GPS 数据（`PosX`, `PosY`, `PosZ`）。
+
+3. **高精度地图操作**：
+   - 脚本通过调用 `HDMapAPI` 中的函数，执行以下操作：
+     - 获取附近车道信息（`getNearLanes`）。
+     - 获取交通标志列表（`getTrafficSignList`）。
+     - 获取车道连接信息（`getLaneLink`）。
+     - 获取交叉区域列表（`getCrossHatchList`）。
+     - 获取交通信号灯列表（`getTrafficLightList`）。
+
+4. **示例函数**：
+   - 脚本提供了多个示例函数，用于演示如何使用 `HDMapAPI` 中的功能：
+     - **SampleGetNearMostLane**：获取车辆当前位置最近的车道。
+     - **SampleGetNearLanes**：获取车辆周围一定半径内的所有车道。
+     - **SampleGetNearLanesWithAngle**：根据车辆航向角和偏移角获取附近车道。
+     - **SampleGetDistanceToLaneBoundary**：计算车辆到车道边界的距离。
+     - **SampleGetLaneSample**：获取车道的详细信息（如车道边界、中心线等）。
+     - **SampleGetLaneLink**：获取车道的连接信息（如前驱车道、后继车道等）。
+     - **SampleGetLaneType**：获取车道的类型。
+     - **SampleGetLaneWidth**：获取车道的宽度。
+     - **SampleGetLaneST**：获取车辆相对于车道的 ST 坐标（纵向和横向位置）。
+     - **SampleGetRoadST**：获取车辆相对于道路的 ST 坐标。
+     - **SampleContainsLane**：检查地图中是否包含指定车道。
+     - **SampleGetParkingSpaceIds**：获取地图中所有停车位的 ID 列表。
+     - **SampleGetParkingSpaceKnots**：获取停车位的边界点信息。
+
+5. **主逻辑**：
+   - `hdmap_Sample` 函数是脚本的主要逻辑，依次调用上述 API 并输出结果。
+   - `run_case` 函数用于运行测试用例，调用 `Samples` 函数执行所有示例操作。
+
+---
+
+### 代码执行流程
+
+1. **初始化**：
+   - 调用 `SoInitSimOneAPI` 初始化仿真 API。
+   - 调用 `HDMapAPI.loadHDMap` 加载高精度地图。
+
+2. **获取车辆位置**：
+   - 通过 `SoGetGps` 获取车辆的 GPS 数据，并更新全局变量 `PosX`, `PosY`, `PosZ`。
+
+3. **执行地图操作**：
+   - 调用 `Samples` 函数，依次执行所有示例操作，输出结果。
+
+4. **终止**：
+   - 调用 `SoTerminateSimOneAPI` 终止仿真 API。
+
+---
+
+### 示例输出
+
+脚本运行时会输出以下信息：
+- 附近车道的 ID 列表。
+- 交通标志的数量和详细信息。
+- 车道连接信息（如前驱车道、后继车道）。
+- 交通信号灯的状态和倒计时。
+- 停车位的 ID 和边界点信息。
+
+例如：
+```
+------------ getNearLanes
+>>>>>>>>>>>>>>>>>>>>>  getNearLanes Size = 
