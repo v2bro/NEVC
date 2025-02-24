@@ -162,7 +162,7 @@ def SampleGetNearLanes(pos, radius):
 		print(",")
 
 def SampleGetNearLanesWithAngle(pos, radius, headingAngle, shiftAngle):
-	#获取周围车道信息，pos,半径，头部偏角，位差角
+	#获取周围车道信息，pos,半径，根据车辆航向角和偏移角获取附近车道。
 	print("SampleGetNearLanesWithAngle:")
 	nearLanesInfo = HDMapAPI.getNearLanesWithAngle(pos, radius, headingAngle, shiftAngle)
 	if nearLanesInfo.exists == False:
